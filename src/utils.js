@@ -8,3 +8,5 @@ const apiNews = axios.create({
 export const fetchArticles = () => {
   return apiNews.get("/articles");
 };
+
+export { apiNews };

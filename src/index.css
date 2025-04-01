@@ -73,3 +73,37 @@
   color: black;
   font-weight: bold;
 }
+
+.articleImg {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 5px;
+}
+
+.boldText {
+  font-weight: bold;
+}
+
+.commentsContainer {
+  margin-top: 20px;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.commentCard {
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.commentCard p {
+  margin: 5px 0;
+}
+
+.commentAuthor {
+  font-weight: bold;
+}
