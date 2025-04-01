@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Articles from "./components/Articles";
 import Homepage from "./components/Homepage";
+import ArticlePage from "./components/ArticlePage";
 
 function Home() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/articles" element={<Articles />} />
+        <Route path="/articles/:articleId" element={<ArticlePage />} />
       </Routes>
     </Router>
   );
