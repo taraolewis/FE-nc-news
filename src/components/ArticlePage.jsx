@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { apiNews } from "../utils";
+import { fetchArticles, fetchComments, voteOnArticle } from "../utils";
 
 function ArticlePage() {
   const { articleId } = useParams();
@@ -12,8 +12,7 @@ function ArticlePage() {
   useEffect(() => {
     setLoading(true);
 
-    apiNews
-      .get(`/articles/${articleId}`)
+    fetchArticles(articleId)
       .then((response) => {
         setArticle(response.data.article);
       })
@@ -21,8 +20,7 @@ function ArticlePage() {
         setError(error.response?.data?.message || "Failed to fetch article");
       });
 
-    apiNews
-      .get(`/articles/${articleId}/comments`)
+    fetchComments(articleId)
       .then((response) => {
         setComments(response.data.comments);
         setLoading(false);
@@ -32,6 +30,17 @@ function ArticlePage() {
         setLoading(false);
       });
   }, [articleId]);
+
+  const handleVote = (voteType) => {
+    const incVotes = voteType === "up" ? 1 : -1;
+    const newVoteCount = article.votes + incVotes;
+
+    setArticle((prevArticle) => ({ ...prevArticle, votes: newVoteCount }));
+
+    voteOnArticle(articleId, incVotes).catch(() => {
+      setArticle((prevArticle) => ({ ...prevArticle, votes: article.votes }));
+    });
+  };
 
   if (loading) return <p>Loading article...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -49,7 +58,19 @@ function ArticlePage() {
         />
       </div>
       <p>{article.body}</p>
-      <p className="boldText">Votes: {article.votes}</p>
+      <div className="voteContainer">
+        <p className="boldText">Votes: {article.votes}</p>
+        <button className="voteButton upvote" onClick={() => handleVote("up")}>
+          👍 Upvote
+        </button>
+        <button
+          className="voteButton downvote"
+          onClick={() => handleVote("down")}
+        >
+          👎 Downvote
+        </button>
+      </div>
+
       <p className="boldText">
         Published: {new Date(article.created_at).toLocaleDateString()}
       </p>

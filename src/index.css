@@ -75,11 +75,13 @@
 }
 
 .articleImg {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
   object-position: center;
   border-radius: 5px;
+  display: block;
+  margin: 0 auto;
 }
 
 .boldText {
@@ -106,4 +108,28 @@
 
 .commentAuthor {
   font-weight: bold;
+}
+
+.voteContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.voteButton {
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.upvote {
+  background-color: #4caf50;
+  color: white;
+}
+
+.downvote {
+  background-color: #f44336;
+  color: white;
 }

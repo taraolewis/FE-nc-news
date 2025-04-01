@@ -5,8 +5,20 @@ const apiNews = axios.create({
   timeout: 10000,
 });
 
-export const fetchArticles = () => {
-  return apiNews.get("/articles");
+export const fetchArticles = (articleId = null) => {
+  if (articleId) {
+    return apiNews.get(`/articles/${articleId}`);
+  } else {
+    return apiNews.get("/articles");
+  }
 };
 
-export { apiNews };
+export const fetchComments = (articleId) => {
+  return apiNews.get(`/articles/${articleId}/comments`);
+};
+
+export const voteOnArticle = (articleId, inc_votes) => {
+  return apiNews.patch(`/articles/${articleId}`, { inc_votes });
+};
+
+export default apiNews;
