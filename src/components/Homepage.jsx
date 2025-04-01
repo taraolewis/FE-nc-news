@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Homepage() {
   return (
-    <div className="home-container">
+    <div className="homeContainer">
       <div className="box">
         <Link to="/topics" className="container">
           <h2>Topics</h2>

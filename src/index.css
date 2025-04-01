@@ -16,7 +16,11 @@
   font-size: 30px;
 }
 
-.home-container {
+.homeButton a {
+  color: black;
+}
+
+.homeContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,5 +47,29 @@
   font-size: 15px;
   color: rgb(15, 4, 4);
   margin-top: 5px;
+  font-weight: bold;
+}
+
+.box a {
+  color: black;
+}
+
+.articlesContainer {
+  padding: 20px;
+}
+
+.articlesList {
+  list-style: none;
+  padding: 0;
+}
+
+.article {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.articleLink {
+  text-decoration: underline;
+  color: black;
   font-weight: bold;
 }
