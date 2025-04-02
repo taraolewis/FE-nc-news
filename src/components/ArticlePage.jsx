@@ -4,6 +4,7 @@ import {
   fetchArticles,
   fetchComments,
   postComment,
+  deleteComment,
   voteOnArticle,
 } from "../utils";
 
@@ -16,6 +17,8 @@ function ArticlePage() {
   const [username, setUsername] = useState("");
   const [newComment, setNewComment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [deletingCommentId, setDeletingCommentId] = useState(null);
+  const loggedInUser = "jessjelly";
 
   useEffect(() => {
     setLoading(true);
@@ -70,6 +73,21 @@ function ArticlePage() {
     }
   };
 
+  const handleDeleteComment = async (commentId) => {
+    setDeletingCommentId(commentId);
+
+    try {
+      await deleteComment(commentId);
+      setComments((prevComments) =>
+        prevComments.filter((comment) => comment.comment_id !== commentId)
+      );
+    } catch (error) {
+      alert("Failed to delete comment");
+    } finally {
+      setDeletingCommentId(null);
+    }
+  };
+
   if (loading) return <p>Loading article...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -115,6 +133,18 @@ function ArticlePage() {
               <p className="commentDate">
                 Posted on: {new Date(comment.created_at).toLocaleDateString()}
               </p>
+
+              {comment.author === loggedInUser && (
+                <button
+                  className="deleteButton"
+                  onClick={() => handleDeleteComment(comment.comment_id)}
+                  disabled={deletingCommentId === comment.comment_id}
+                >
+                  {deletingCommentId === comment.comment_id
+                    ? "Deleting..."
+                    : "Delete"}
+                </button>
+              )}
             </div>
           ))
         )}

@@ -5,6 +5,8 @@ import Header from "./components/Header";
 import Articles from "./components/Articles";
 import Homepage from "./components/Homepage";
 import ArticlePage from "./components/ArticlePage";
+import UserProfile from "./components/UserProfile";
+import Users from "./components/Users";
 
 function Home() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/articles" element={<Articles />} />
         <Route path="/articles/:articleId" element={<ArticlePage />} />
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/users" element={<Users />} />
       </Routes>
     </Router>
   );
