@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { fetchArticles, fetchComments, voteOnArticle } from "../utils";
+import {
+  fetchArticles,
+  fetchComments,
+  postComment,
+  voteOnArticle,
+} from "../utils";
 
 function ArticlePage() {
   const { articleId } = useParams();
@@ -8,6 +13,9 @@ function ArticlePage() {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [username, setUsername] = useState("");
+  const [newComment, setNewComment] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -40,6 +48,26 @@ function ArticlePage() {
     voteOnArticle(articleId, incVotes).catch(() => {
       setArticle((prevArticle) => ({ ...prevArticle, votes: article.votes }));
     });
+  };
+
+  const handleCommentSubmit = async (event) => {
+    event.preventDefault();
+    if (!newComment.trim()) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await postComment(articleId, {
+        username: username,
+        body: newComment,
+      });
+      setComments((prevComments) => [response.data.comment, ...prevComments]);
+      setNewComment("");
+    } catch (error) {
+      alert("Failed to post comment");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (loading) return <p>Loading article...</p>;
@@ -91,6 +119,26 @@ function ArticlePage() {
           ))
         )}
       </div>
+
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Enter your username..."
+        required
+      />
+      <form onSubmit={handleCommentSubmit} className="commentForm">
+        <textarea
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+          placeholder="Write your comment..."
+          required
+          disabled={isSubmitting}
+        />
+        <button type="submit" disabled={isSubmitting || !newComment.trim()}>
+          {isSubmitting ? "Posting..." : "Post Comment"}
+        </button>
+      </form>
     </div>
   );
 }

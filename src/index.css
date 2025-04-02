@@ -12,8 +12,8 @@
 }
 
 .homeButton {
-  margin-left: auto;
   font-size: 30px;
+  color: black;
 }
 
 .homeButton a {
@@ -132,4 +132,52 @@
 .downvote {
   background-color: #f44336;
   color: white;
+}
+
+.commentForm {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.commentForm textarea {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.commentForm button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.commentForm button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.userAvatar {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.avatarImage {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.navContainer {
+  display: flex;
+  align-items: center;
+  gap: 40px;
 }
