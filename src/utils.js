@@ -17,6 +17,10 @@ export const fetchComments = (articleId) => {
   return apiNews.get(`/articles/${articleId}/comments`);
 };
 
+export const postComment = (articleId, commentData) => {
+  return apiNews.post(`/articles/${articleId}/comments`, commentData);
+};
+
 export const voteOnArticle = (articleId, inc_votes) => {
   return apiNews.patch(`/articles/${articleId}`, { inc_votes });
 };
