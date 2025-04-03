@@ -4,12 +4,12 @@ const apiNews = axios.create({
   baseURL: "https://be-nc-news-wwtd.onrender.com/api",
 });
 
-export const fetchArticles = (articleId = null) => {
-  if (articleId) {
-    return apiNews.get(`/articles/${articleId}`);
-  } else {
-    return apiNews.get("/articles");
-  }
+export const fetchArticles = (sort_by = "created_at", order = "desc") => {
+  return apiNews.get(`/articles?sort_by=${sort_by}&order=${order}`);
+};
+
+export const fetchArticle = (articleId) => {
+  return apiNews.get(`/articles/${articleId}`);
 };
 
 export const fetchComments = (articleId) => {
