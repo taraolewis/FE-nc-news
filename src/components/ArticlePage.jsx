@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import {
   fetchArticles,
   fetchComments,
@@ -90,12 +90,18 @@ function ArticlePage() {
 
   if (loading) return <p>Loading article...</p>;
   if (error) return <p>Error: {error}</p>;
+  if (!article) return <p>Article not found.</p>;
 
   return (
     <div>
       <h2>{article.title}</h2>
       <p className="boldText">By: {article.author}</p>
-      <p className="boldText">Topic: {article.topic}</p>
+      <p className="boldText">
+        Topic:{" "}
+        <Link to={`/topics/${article.topic}`} className="topicLink">
+          {article.topic}
+        </Link>
+      </p>
       <div className="articleImgContainer">
         <img
           src={article.article_img_url}
