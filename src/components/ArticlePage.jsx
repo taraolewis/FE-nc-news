@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
-  fetchArticles,
+  fetchArticle,
   fetchComments,
   postComment,
   deleteComment,
@@ -23,7 +23,7 @@ function ArticlePage() {
   useEffect(() => {
     setLoading(true);
 
-    fetchArticles(articleId)
+    fetchArticle(articleId)
       .then((response) => {
         setArticle(response.data.article);
       })
