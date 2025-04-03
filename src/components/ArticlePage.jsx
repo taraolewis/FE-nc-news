@@ -25,10 +25,18 @@ function ArticlePage() {
 
     fetchArticle(articleId)
       .then((response) => {
-        setArticle(response.data.article);
+        if (!response.data.article) {
+          setError("Article not found");
+        } else {
+          setArticle(response.data.article);
+        }
+        setLoading(false);
       })
       .catch((error) => {
-        setError(error.response?.data?.message || "Failed to fetch article");
+        const errorMessage =
+          error.response?.data?.message || "Failed to fetch article";
+        setError(errorMessage);
+        setLoading(false);
       });
 
     fetchComments(articleId)

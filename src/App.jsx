@@ -9,6 +9,7 @@ import UserProfile from "./components/UserProfile";
 import Users from "./components/Users";
 import TopicsPage from "./components/TopicsPage";
 import TopicArticlesPage from "./components/TopicArticlesPage";
+import NotFoundPage from "./components/NotFoundPage";
 
 function Home() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/users" element={<Users />} />
         <Route path="/topics" element={<TopicsPage />} />
         <Route path="/topics/:topicSlug" element={<TopicArticlesPage />} />
+        <Route component={NotFoundPage} />
       </Routes>
     </Router>
   );
