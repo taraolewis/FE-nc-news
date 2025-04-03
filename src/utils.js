@@ -2,7 +2,6 @@ import axios from "axios";
 
 const apiNews = axios.create({
   baseURL: "https://be-nc-news-wwtd.onrender.com/api",
-  timeout: 10000,
 });
 
 export const fetchArticles = (articleId = null) => {
@@ -31,6 +30,10 @@ export const voteOnArticle = (articleId, inc_votes) => {
 
 export const fetchUsers = () => {
   return apiNews.get("/users");
+};
+
+export const fetchTopics = () => {
+  return apiNews.get("/topics");
 };
 
 export default apiNews;
