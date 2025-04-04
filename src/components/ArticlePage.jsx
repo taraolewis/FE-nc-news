@@ -63,13 +63,16 @@ function ArticlePage() {
 
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
-    if (!newComment.trim()) return;
+    if (!newComment.trim()) {
+      alert("Please enter a valid comment.");
+      return;
+    }
 
     setIsSubmitting(true);
 
     try {
       const response = await postComment(articleId, {
-        username: username,
+        username: loggedInUser,
         body: newComment,
       });
       setComments((prevComments) => [response.data.comment, ...prevComments]);
@@ -135,6 +138,23 @@ function ArticlePage() {
         Published: {new Date(article.created_at).toLocaleDateString()}
       </p>
 
+      <h3>Add a Comment</h3>
+      <p className="commentUser">
+        Commenting as <strong>{loggedInUser}</strong>
+      </p>
+      <form onSubmit={handleCommentSubmit} className="commentForm">
+        <textarea
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+          placeholder="Write your comment..."
+          required
+          disabled={isSubmitting}
+        />
+        <button type="submit" disabled={isSubmitting || !newComment.trim()}>
+          {isSubmitting ? "Posting..." : "Post Comment"}
+        </button>
+      </form>
+
       <h3>{comments.length} Comments:</h3>
       <div className="commentsContainer">
         {comments.length === 0 ? (
@@ -147,7 +167,6 @@ function ArticlePage() {
               <p className="commentDate">
                 Posted on: {new Date(comment.created_at).toLocaleDateString()}
               </p>
-
               {comment.author === loggedInUser && (
                 <button
                   className="deleteButton"
@@ -163,26 +182,6 @@ function ArticlePage() {
           ))
         )}
       </div>
-
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Enter your username..."
-        required
-      />
-      <form onSubmit={handleCommentSubmit} className="commentForm">
-        <textarea
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-          placeholder="Write your comment..."
-          required
-          disabled={isSubmitting}
-        />
-        <button type="submit" disabled={isSubmitting || !newComment.trim()}>
-          {isSubmitting ? "Posting..." : "Post Comment"}
-        </button>
-      </form>
     </div>
   );
 }
