@@ -1,12 +1,21 @@
-# React + Vite
+# NC News Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+DEPLOYED VERSION: The frontend application is hosted on Vercel and can be accessed at: https://fe-nc-news-xi.vercel.app
 
-Currently, two official plugins are available:
+PROJECT SUMMARY: NC News is a responsive news web application that allows users to browse, read, and interact with a variety of articles on different topics. Built with React, the app connects to the NC News API to provide dynamic content and user interactions in real-time.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Users can filter articles by date or votes, read full articles with comments, and post, delete, or vote on comments. The app offers easy navigation and a clean, mobile-friendly design optimised for all devices.
 
-## Expanding the ESLint configuration
+BACKEND REPO: https://github.com/taraolewis/BE-nc-news
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+MINIMUM VERSIONS REQUIRED: Node.js (v16.0.0 or higher)
+
+SET-UP:
+
+- To set up the project locally, clone the repositary by opening your terminal and typing in the command 'git clone' then the link to the repositary: https://github.com/taraolewis/FE-nc-news
+
+- Install the dependancies in the package.json file onto your cloned repositary by typing the command 'npm install' into your terminal.
+
+- Start the development server by typing the command 'npm run dev' into your terminal. Once the server is running, copy the local URL (e.g. http://localhost:3000) into your browser to view the app. The page will reload automatically as you make changes.
+
+This portfolio project was created as part of a Digital Skills Bootcamp in Software Engineering provided by [Northcoders](https://northcoders.com/)
